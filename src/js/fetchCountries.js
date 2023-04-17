@@ -3,7 +3,7 @@ export const fetchCountries = name => {
   const requestParameters = 'fields=name,capital,population,flags,languages';
 
   return fetch(`${BASE_URL}${name}?${requestParameters}`).then(response => {
-    console.log(response);
+    // console.log(response);
     if (!response.ok) {
       throw new Error(response.status);
     }

@@ -54,7 +54,16 @@ function onSearch(evt) {
          */
       }
     })
-    .catch(() => onError());
+    .catch(error => {
+      if (error.message === '404') {
+        Notiflix.Notify.failure('Oops, there is no country with that name');
+        cleanMarkUp();
+        resetInpyt();
+      }
+      console.log(error);
+    });
+
+  // onError());
 }
 
 function createMarkupCountryList({ name, flags }) {
@@ -136,9 +145,13 @@ function cleanMarkUp() {
   refs.countryInfo.innerHTML = '';
 }
 
-function onError() {
-  Notiflix.Notify.failure('Oops, there is no country with that name');
+function resetInpyt() {
+  refs.searchInput.value = '';
 }
+
+// function onError() {
+//   Notiflix.Notify.failure('Oops, there is no country with that name');
+// }
 
 function onNotice() {
   Notiflix.Notify.info(
